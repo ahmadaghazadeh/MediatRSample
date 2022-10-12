@@ -1,2 +1,2 @@
-# MedoatRSample
-MedoatR Sample
+# MediatRSample
+MediatR Sample 
