@@ -1,5 +1,9 @@
+using API.Application.AddWeatherForecastCommand;
 using API.Models;
+using API.Models.WeatherForecastQuery;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace API.Controllers
 {
@@ -7,18 +11,27 @@ namespace API.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-       
+        private IMediator mediator;
+        
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator)
         {
             _logger = logger;
+            this.mediator = mediator;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IList<WeatherForecast>> Get()
         {
-             
+            var forecasts = await mediator.Send(new WeatherForecastsQuery());
+            return forecasts.WeatherForecastList;
+        }
+
+        [HttpPost(Name = "AddWeatherForecast")]
+        public async Task add(AddWeatherForecastCommand command)
+        {
+            await mediator.Send(command);         
         }
     }
 }

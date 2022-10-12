@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Models
+namespace API.Models.WeatherForecastQuery
 {
     public class WeatherForecastQueryHandler : IRequestHandler<WeatherForecastsQuery, WeatherForecastsResponse>
     {
@@ -14,7 +14,7 @@ namespace API.Models
 
         public async Task<WeatherForecastsResponse> Handle(WeatherForecastsQuery request, CancellationToken cancellationToken)
         {
-            var model = await _context.WeatherForecasts.ToListAsync();
+            var model = await _context.WeatherForecasts.ToListAsync(cancellationToken);
             return new WeatherForecastsResponse(model);
         }
     }
