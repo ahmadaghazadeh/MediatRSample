@@ -1,9 +1,8 @@
-using API.Application.AddWeatherForecastCommand;
+using API.Application.CreateWeatherForecast;
 using API.Models;
 using API.Models.WeatherForecastQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
 
 namespace API.Controllers
 {
@@ -29,7 +28,7 @@ namespace API.Controllers
         }
 
         [HttpPost(Name = "AddWeatherForecast")]
-        public async Task add(AddWeatherForecastCommand command)
+        public async Task add(CreateWeatherForecastCommand command)
         {
             await mediator.Send(command);         
         }

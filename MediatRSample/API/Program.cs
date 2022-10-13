@@ -1,7 +1,8 @@
 using API;
+using API.Piplines;
+using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
+using System.ComponentModel;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApiContext>();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+// Order Inject call pipelines
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 
 var app = builder.Build();
 

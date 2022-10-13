@@ -1,22 +1,19 @@
 ﻿using MediatR;
 
-namespace API.Application.AddWeatherForecastCommand
+namespace API.Application.CreateWeatherForecast
 {
-    public class AddWeatherForecastCommandHandler : IRequestHandler<AddWeatherForecastCommand, Unit>
+    public class CreateWeatherForecastCommandHandler : IRequestHandler<CreateWeatherForecastCommand, Unit>
     {
 
-        
 
-        public AddWeatherForecastCommandHandler(ApiContext apiContext, ILogger logger)
+        public CreateWeatherForecastCommandHandler(ApiContext apiContext)
         {
             this.apiContext = apiContext;
-            this.logger = logger;
         }
 
         private readonly ApiContext apiContext;
-        private readonly ILogger logger;
 
-        public async Task<Unit> Handle(AddWeatherForecastCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateWeatherForecastCommand request, CancellationToken cancellationToken)
         {
             await apiContext.WeatherForecasts.AddAsync(new Models.WeatherForecast
             {
@@ -26,7 +23,6 @@ namespace API.Application.AddWeatherForecastCommand
                 TemperatureC = request.TemperatureC,
             }, cancellationToken);
             await apiContext.SaveChangesAsync(cancellationToken);
-            logger.LogInformation($"WeatherForecast {request.Id} was added to the WeatherForecasts");
             return Unit.Value;
 
         }
