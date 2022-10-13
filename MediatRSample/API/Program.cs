@@ -2,6 +2,7 @@ using API;
 using API.Piplines;
 using FluentValidation;
 using MediatR;
+using MediatR.Pipeline;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -19,6 +20,7 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 // Order Inject call pipelines
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+builder.Services.AddTransient(typeof(IRequestExceptionHandler<,,>), typeof(RequestExceptionProcessorBehavior<,,>));
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

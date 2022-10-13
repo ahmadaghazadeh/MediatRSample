@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using API.Notification;
+using MediatR;
+using System.Net.NetworkInformation;
 
 namespace API.Application.CreateWeatherForecast
 {
@@ -6,12 +8,14 @@ namespace API.Application.CreateWeatherForecast
     {
 
 
-        public CreateWeatherForecastCommandHandler(ApiContext apiContext)
+        public CreateWeatherForecastCommandHandler(ApiContext apiContext,IMediator mediator)
         {
             this.apiContext = apiContext;
+            this.mediator = mediator;
         }
 
         private readonly ApiContext apiContext;
+        private readonly IMediator mediator;
 
         public async Task<Unit> Handle(CreateWeatherForecastCommand request, CancellationToken cancellationToken)
         {
@@ -23,6 +27,9 @@ namespace API.Application.CreateWeatherForecast
                 TemperatureC = request.TemperatureC,
             }, cancellationToken);
             await apiContext.SaveChangesAsync(cancellationToken);
+
+            await mediator.Publish(new WeatherForecastAdded(request.Id));
+
             return Unit.Value;
 
         }
