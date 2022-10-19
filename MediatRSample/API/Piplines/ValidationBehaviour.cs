@@ -9,7 +9,7 @@ namespace API.Piplines
         public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
         {
             _validators = validators;
-        }
+        } 
         public async Task<TResponsed> Handle(TRequest request, RequestHandlerDelegate<TResponsed> next, CancellationToken cancellationToken)
         {
             if (_validators.Any())
