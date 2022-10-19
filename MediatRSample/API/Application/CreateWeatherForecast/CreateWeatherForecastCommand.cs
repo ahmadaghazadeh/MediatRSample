@@ -10,6 +10,6 @@ namespace API.Application.CreateWeatherForecast
         public int TemperatureC { get; set; }
 
         public string? Summary { get; set; }
- 
+  
     }
 }
