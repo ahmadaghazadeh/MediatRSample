@@ -14,7 +14,7 @@ namespace API.Notification
         public Task Handle(WeatherForecastAdded notification, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"WeatherForecast added more info {notification.Id}");
-            return Task.CompletedTask;
+            return Task.CompletedTask; 
 
         }
     }
