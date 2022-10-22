@@ -12,7 +12,7 @@ namespace API.Piplines
         public RequestExceptionProcessorBehavior(ILogger<RequestExceptionProcessorBehavior<TRequest, TResponse, TException>> logger)
         {
             _logger = logger;
-        }
+        } 
 
         public Task Handle(TRequest request, TException exception, RequestExceptionHandlerState<TResponse> state, CancellationToken cancellationToken)
         {
