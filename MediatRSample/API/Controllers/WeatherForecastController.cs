@@ -26,7 +26,7 @@ namespace API.Controllers
             var forecasts = await mediator.Send(new WeatherForecastsQuery());
             return forecasts.WeatherForecastList;
         }
-
+ 
         [HttpPost(Name = "AddWeatherForecast")]
         public async Task add(CreateWeatherForecastCommand command)
         {
