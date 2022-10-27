@@ -20,6 +20,12 @@ namespace API.Controllers
             this.mediator = mediator;
         }
 
+        [HttpPost(Name = "AddWeatherForecast")]
+        public async Task add(CreateWeatherForecastCommand command)
+        {
+            await mediator.Send(command);         
+        }
+        
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<IList<WeatherForecast>> Get()
         {
@@ -27,10 +33,6 @@ namespace API.Controllers
             return forecasts.WeatherForecastList;
         }
  
-        [HttpPost(Name = "AddWeatherForecast")]
-        public async Task add(CreateWeatherForecastCommand command)
-        {
-            await mediator.Send(command);         
-        }
+       
     }
 }
