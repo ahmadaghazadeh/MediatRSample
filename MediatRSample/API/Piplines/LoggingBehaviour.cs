@@ -24,7 +24,6 @@ namespace API.Piplines
                 _logger.LogInformation("{Property} : {@Value}", prop.Name, propValue);
             }
             var response = await next();
-            //Response
             _logger.LogInformation($"Handled {typeof(TResponse).Name}");
             return response;
         }
