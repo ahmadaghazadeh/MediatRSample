@@ -11,7 +11,6 @@ namespace API.Models.WeatherForecastQuery
         {
             _context = context;
         }
-
         public async Task<WeatherForecastsResponse> Handle(WeatherForecastsQuery request, CancellationToken cancellationToken)
         {
             var model = await _context.WeatherForecasts.ToListAsync(cancellationToken);
