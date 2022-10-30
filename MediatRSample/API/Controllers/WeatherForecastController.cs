@@ -11,7 +11,7 @@ namespace API.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private IMediator mediator;
-        
+         
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator)
