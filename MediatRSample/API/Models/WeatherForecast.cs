@@ -11,6 +11,6 @@ namespace API.Models
  
         public string? Summary { get; set; }
         
-       public DateTime Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }
